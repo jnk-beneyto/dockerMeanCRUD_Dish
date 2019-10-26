@@ -1,0 +1,92 @@
+<div class="row">
+  <div class="col-sm-12 col-md-6 col-lg-6" id="addBox">
+    <div class="container">
+      <h3 class="text-center">{{titleCreate}}</h3>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-12" id="formAdd">
+        <div class="container mx-auto">
+          <form #dishForm="ngForm" (ngSubmit)="onSubmit(dishForm)">
+            <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="_dishService.selectedDish._id">
+            <div class="form-group">
+              <input name="name" class="form-control" #name="ngModel" [(ngModel)]="_dishService.selectedDish.name"
+                type="text" placeholder="dishName ..." required>
+            </div>
+            <div class="container">
+              <span class="error" *ngIf="description.touched && !description.valid">
+                fill in this field
+              </span>
+            </div>
+            <div class="form-group">
+              <select name="type" class="form-control" #type="ngModel" [(ngModel)]="_dishService.selectedDish.type"
+                required>
+                <option selected="true" disabled="disabled">pick a type</option>
+                <option value="starter">starter</option>
+                <option value="main">main</option>
+                <option value="dessert">dessert</option>
+                <option value="drink">drink</option>
+              </select>
+            </div>
+            <div class="container">
+              <span class="error" *ngIf="type.touched && !type.valid">
+                fill in this field
+              </span>
+            </div>
+            <div class="form-group">
+              <textarea name='description' class="form-control" #description="ngModel"
+                [(ngModel)]="_dishService.selectedDish.description" rows="3" placeholder="description ..."
+                required></textarea>
+            </div>
+            <div class="container">
+              <span class="error" *ngIf="description.touched && !description.valid">
+                fill in this field
+              </span>
+            </div>
+            <div class="form-group">
+              <input class="btn btn-primary form-control" type="submit" value="add Dish"
+                [disabled]="!dishForm.form.valid">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ////////// -->
+  <div class="col-sm-12 col-md-6 col-lg-6" id="listBox">
+    <div>
+      <div class="container">
+        <h3 class="text-center">{{titleList}}</h3>
+      </div>
+    </div>
+    <hr>
+    <div *ngFor="let dish of _dishService.dishes" class="card  mt-2">
+      <div class="row ">
+        <div class="col-9 ">
+          <div class="container">
+            <div class="row">
+              <div class="col-8">
+                <h5>{{dish.name}}</h5>
+              </div>
+              <div class="col-4">
+                <h6>{{dish.type}}</h6>
+              </div>
+            </div>
+            <hr>
+            <div class="row ">
+              <div class="col-12">{{dish.description}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-3 d-flex justify-content-center flex-column">
+          <div class="container py-1 ">
+            <a (click)="editDish(dish)" class="btn btn-warning w-100 "><i class="far fa-edit"></i></a>
+          </div>
+          <div class="container py-1">
+            <a (click)="deleteDish(dish,dishForm)" class="btn btn-danger w-100"><i class="fas fa-trash-alt"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

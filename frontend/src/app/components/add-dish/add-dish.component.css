@@ -1,0 +1,23 @@
+.row {
+  margin-top: 5px;
+}
+
+.container {
+  padding: 10px;
+}
+
+.error {
+  font-size: 12px;
+  background-color: red;
+  color: white;
+}
+
+
+.form-group {
+  margin: 5px;
+}
+
+.form input[disabled] {
+  opacity: 0, 6;
+  cursor: not-allowed;
+}
